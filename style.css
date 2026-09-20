@@ -53,13 +53,19 @@ img { display: block; max-width: 100%; }
    WORDMARK
    =========================== */
 .wordmark {
-  font-weight: 900;
-  font-size: 1.65rem;
-  letter-spacing: 0.06em;
-  color: var(--white);
   display: inline-flex;
   align-items: center;
-  line-height: 1;
+  text-decoration: none;
+}
+.logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: var(--transition);
+}
+.logo-img:hover {
+  opacity: 0.9;
 }
 .wordmark .dot { color: var(--yellow); }
 .wordmark-dark  { color: var(--navy); }
