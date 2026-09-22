@@ -1,0 +1,9 @@
+# Firebase CLI deploy cache — regenerated locally, never committed
+.firebase/
+*.log
+
+# Service account keys must never land in the repo
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+
+.DS_Store

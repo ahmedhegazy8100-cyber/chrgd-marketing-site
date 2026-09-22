@@ -1,0 +1,47 @@
+name: Deploy to Firebase Hosting
+
+# Deploys the site to the live channel on every push to main.
+# Manual runs are available from the Actions tab via workflow_dispatch.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never let two deploys race; the newest push wins.
+concurrency:
+  group: firebase-hosting-live
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to chrgd-8c18f
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      # No build step — the repo contents are what ships.
+      - name: Deploy to Firebase Hosting (live)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHRGD_8C18F }}
+          projectId: chrgd-8c18f
+          channelId: live
+
+      - name: Smoke-check the live site
+        run: |
+          fail=0
+          for path in / /about.html /stations.html /investors.html /style.css /.git/config; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://chrgd-8c18f.web.app${path}")
+            case "$path" in
+              /.git/*) want=404 ;;
+              *)       want=200 ;;
+            esac
+            printf '%-20s %s (expected %s)\n' "$path" "$code" "$want"
+            [ "$code" = "$want" ] || fail=1
+          done
+          exit $fail

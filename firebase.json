@@ -1,0 +1,55 @@
+{
+  "hosting": {
+    "site": "chrgd-8c18f",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      ".git",
+      ".git/**",
+      "**/.git/**",
+      ".firebase",
+      ".firebase/**",
+      "**/.*",
+      "**/node_modules/**",
+      "**/*.key",
+      "**/*.pem",
+      "**/serviceAccount*.json",
+      "**/*firebase-adminsdk*.json",
+      "CLAUDE.md",
+      "server.ps1",
+      "CNAME"
+    ],
+    "cleanUrls": false,
+    "trailingSlash": false,
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|png|gif|svg|webp|ico)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=86400"
+          }
+        ]
+      },
+      {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300"
+          }
+        ]
+      }
+    ]
+  }
+}

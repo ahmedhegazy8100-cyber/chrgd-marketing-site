@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "chrgd-8c18f"
+  },
+  "targets": {
+    "chrgd-8c18f": {
+      "hosting": {
+        "site": ["chrgd-8c18f"]
+      }
+    }
+  }
+}
